@@ -30,8 +30,8 @@ function out = jpeg_encoder(img)
     %resizing is made
     [rows, cols] = size(img);
     if ((mod(rows, block_size) ~= 0) || (mod(rows, block_size) ~= 0))
-        rows = floor(rows/block_size);
-        cols = floor(cols/block_size);
+        rows = floor(rows/block_size)*8;
+        cols = floor(cols/block_size)*8;
         img = imresize(img,[rows, cols]);
     end
     %transformation matrix for discrete cosine transform
@@ -66,12 +66,18 @@ function out = jpeg_encoder(img)
     end
     stream_data((count + 1):end) = [];            % delete unused portion of streams_together
     
+    %Huffman ecoding of stream data
+    symbols = unique(stream_data);
+    probs = histc(stream_data,symbols);
+    probs = probs/sum(probs);
+    
+    huffman_dict = huffmandict(symbols, probs);
+    huffman_stream_data = huffmanenco(stream_data, huffman_dict);
+    
     out = struct;
     out.size = uint16([rows, cols]);
     out.numblocks = uint16(number_of_blocks);
     %with used transform normalization table we have 50% quality
     out.quality = uint16(50);
-    %huffman should be implemented later
-    out.huffman = stream_data;
-    %out.huffman   = mat2huff(r);
+    out.data = huffman_stream_data;
 end
