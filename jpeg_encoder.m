@@ -1,6 +1,6 @@
 %Simple jpeg encoder for grayscale images
 function out = jpeg_encoder(img)
-    if ~ismatrix(img)% || ~isa(img, 'uint8')
+    if ~ismatrix(img)
         error('Input error, should be uint8 image');
     end
     

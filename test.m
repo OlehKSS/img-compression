@@ -5,7 +5,7 @@ seq = 'ACTAGC';
 %splits sequence into cell array of separate characters
 seq_cellarr = cellstr(seq')';
 disp('--------------------Test 1------------------------');
-encoded_seq = arithm_encoding(alph, probs, seq_cellarr);
+encoded_seq = arithm_encoder(alph, probs, seq_cellarr);
 disp(strcat('Output binary sequence: ', encoded_seq));
 decoded_seq = arithm_decoder(alph, probs, encoded_seq, length(seq));
 disp(strcat('Decoded sequence: ', decoded_seq));
@@ -16,7 +16,7 @@ probs2 = [1, 2, 3, 2]./length(seq2);
 %splits sequence into cell array of separate characters
 seq_cellarr2 = cellstr(seq2')';
 disp('--------------------Test 2------------------------');
-encoded_seq2 = arithm_encoding(alph2, probs2, seq_cellarr2);
+encoded_seq2 = arithm_encoder(alph2, probs2, seq_cellarr2);
 disp(strcat('Output binary sequence: ', encoded_seq2));
 decoded_seq2 = arithm_decoder(alph2, probs2, encoded_seq2, length(seq2));
 disp(strcat('Decoded sequence: ', decoded_seq2));

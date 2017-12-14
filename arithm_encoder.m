@@ -1,4 +1,11 @@
-function out = arithm_encoding(symbols, probs, sequence)
+function out = arithm_encoder(symbols, probs, sequence)
+    % Function realizes arithmetic encoding algorithm, symbols is
+    % cell array of symbols used for encoding of provided sequence, probs
+    % is one-dimensional array of numbers each of which representing 
+    % probability of occurence of corresponding symbol from symbols cell
+    % array, sequence is a sequnce to be encoded. Returns binary 
+    % represetation as 2^(-n) of real number n, such that 0<=n<=1
+    %
     prob_map = containers.Map(symbols, probs);
     
     interval_low = zeros(1, length(probs));

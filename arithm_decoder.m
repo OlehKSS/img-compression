@@ -1,4 +1,11 @@
 function out = arithm_decoder(symbols, probs, bin_sequence, number_of_chars)
+    % Function realizes arithmetic decoding algorithm, symbols is
+    % cell array of symbols used for encoding of provided sequence, probs
+    % is one-dimensional array of numbers each of which representing 
+    % probability of occurence of corresponding symbol from symbols cell
+    % array, bin_sequence is a binary representation returned by 
+    % arithm_encoder function, number_of_chars is number of characters that
+    % we should decode. Returns char array of decoded symbols
     bin_seq_dec = vpa(bin2dec(bin_sequence)/2^(length(bin_sequence)-1)); 
     sequence = blanks(number_of_chars);
     
